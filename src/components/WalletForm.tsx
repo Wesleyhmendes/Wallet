@@ -1,7 +1,29 @@
-import getCharacter from '../services/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getCharacter } from '../redux/actions';
+import { Dispatch, WalletInfo } from '../type';
 
 function WalletForm() {
-  getCharacter();
+  const [userExpense, setUserExpense] = useState([{
+    id: 0,
+    value: '',
+    description: '',
+    currency: '',
+    method: '',
+    tag: '',
+    exchangeRates: {},
+  }]);
+
+  const dispatch: Dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCharacter());
+  }, []);
+
+  const currencies = useSelector((state: WalletInfo) => state.wallet.currencies);
+  const coins = Object.keys(currencies);
+
+  console.log(currencies);
   return (
     <section>
       <label htmlFor="description">
@@ -33,11 +55,12 @@ function WalletForm() {
       <label htmlFor="currency">
         Moeda
         <select name="currency" data-testid="currency-input">
-          {/* coinsApi.forEach((coin) => {
-            <option value={ confirm.code }>{ confirm.code }</option>
-          }) */}
+          { coins.map((coin, index) => (
+            <option key={ index } value={ coin }>{ coin }</option>
+          )) }
         </select>
       </label>
+      <button>Adicionar despesa</button>
     </section>
   );
 }

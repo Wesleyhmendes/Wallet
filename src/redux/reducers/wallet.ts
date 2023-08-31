@@ -14,7 +14,7 @@ const personalWallet = (state = INITIAL_STATE, action: AnyAction) => {
     case CURRENCY_API_SUCCESS:
       return {
         ...state,
-        currencies: action.payload,
+        currencies: Object.keys(action.payload),
       };
     case CURRENCY_API_START:
       return state;

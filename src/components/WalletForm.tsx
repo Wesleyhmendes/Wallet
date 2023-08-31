@@ -4,6 +4,7 @@ import { getCurrencyApi } from '../redux/actions';
 import { Dispatch, WalletInfo } from '../type';
 
 function WalletForm() {
+  const [lastId, setLastId] = useState(0);
   const [userExpense, setUserExpense] = useState({
     id: 0,
     value: 0,
@@ -18,8 +19,10 @@ function WalletForm() {
   }, []);
 
   const dispatch: Dispatch = useDispatch();
+
   const currencies = useSelector((state: WalletInfo) => state.wallet.currencies);
-  const coins = Object.keys(currencies);
+
+  console.log(currencies);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -31,15 +34,21 @@ function WalletForm() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setUserExpense({
+      ...userExpense,
+      id: lastId === 0 ? 0 : lastId,
+    });
+    dispatch(getCurrencyApi(false));
+    setLastId(lastId + 1);
     dispatch(getCurrencyApi(userExpense));
-    // setUserExpense({
-    //   id: 0,
-    //   value: 0,
-    //   description: '',
-    //   currency: '',
-    //   method: '',
-    //   tag: '',
-    // });
+    setUserExpense({
+      id: 0,
+      value: 0,
+      description: '',
+      currency: 'USD',
+      method: 'money',
+      tag: 'Alimentação',
+    });
   };
 
   return (
@@ -47,6 +56,7 @@ function WalletForm() {
       <label htmlFor="description">
         Descrição da despesa
         <input
+          data-testid="description-input"
           value={ userExpense.description }
           onChange={ handleChange }
           name="description"
@@ -59,8 +69,9 @@ function WalletForm() {
           onChange={ (event) => handleChange(event) }
           name="tag"
           data-testid="tag-input"
+          defaultValue="Alimentação"
         >
-          <option selected value="Alimentação">Alimentação</option>
+          <option value="Alimentação">Alimentação</option>
           <option value="Lazer">Lazer</option>
           <option value="Trabalho">Trabalho</option>
           <option value="Transporte">Transporte</option>
@@ -83,8 +94,9 @@ function WalletForm() {
           onChange={ (event) => handleChange(event) }
           name="method"
           data-testid="method-input"
+          defaultValue="Dinheiro"
         >
-          <option selected value="Dinheiro">Dinheiro</option>
+          <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de crédito">Cartão de crédito</option>
           <option value="Cartão de débito">Cartão de débito</option>
         </select>
@@ -96,7 +108,7 @@ function WalletForm() {
           name="currency"
           data-testid="currency-input"
         >
-          { coins.map((coin, index) => (
+          { currencies.map((coin, index) => (
             <option key={ index } value={ coin }>{ coin }</option>
           )) }
         </select>

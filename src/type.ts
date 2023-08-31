@@ -24,72 +24,72 @@ export type ExpensesType = {
     'tag': string,
     'exchangeRates': {
       'USD': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'CAD': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'EUR': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'GBP': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'ARS': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'BTC': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'LTC': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'JPY': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'CHF': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'AUD': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'CNY': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'ILS': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'ETH': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       },
       'XRP': {
-        'code': string,
+        'code': string | unknown | any,
         'name': string,
         'ask': string,
       }

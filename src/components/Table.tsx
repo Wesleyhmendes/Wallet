@@ -1,14 +1,36 @@
-import { useSelector } from 'react-redux';
-import { WalletInfo } from '../type';
+import { useDispatch, useSelector } from 'react-redux';
+import { MouseEvent, useEffect, useState } from 'react';
+import { Dispatch, TableInfos, WalletInfo } from '../type';
+import { updateExpenses } from '../redux/actions';
 
 function Table() {
-  const userExpenses = useSelector((state: WalletInfo) => state.wallet.expenses);
+  const [expenseState, setExpenseState] = useState<TableInfos[]>([]);
 
-  let selectedCambio = '';
-  userExpenses.forEach((expense) => {
-    const { currency } = expense;
-    selectedCambio = expense.exchangeRates[currency].name;
-  });
+  const userExpenses = useSelector((state: WalletInfo) => state.wallet.expenses);
+  const dispatch: Dispatch = useDispatch();
+
+  useEffect(() => {
+    const getExpenses = userExpenses.map((expense) => {
+      return {
+        description: expense.description,
+        tag: expense.tag,
+        method: expense.method,
+        value: parseFloat(expense.value),
+        currency: expense.exchangeRates[expense.currency].name,
+        cambio: parseFloat(expense.exchangeRates[expense.currency].ask),
+        convert: (parseFloat(expense.value) * parseFloat(expense
+          .exchangeRates[expense.currency].ask)),
+        baseCoin: 'Real',
+        id: expense.id,
+      };
+    });
+
+    setExpenseState(getExpenses);
+  }, [userExpenses]);
+
+  const handleDelete = (id: number) => {
+    dispatch(updateExpenses(id));
+  };
 
   return (
     <table>
@@ -25,22 +47,26 @@ function Table() {
           <th>Editar/Excluir</th>
         </tr>
       </thead>
-      { userExpenses.map((expense, index) => (
-        <tbody key={ index }>
+      { expenseState.map((expense) => (
+        <tbody key={ expense.id }>
           <tr>
             <td>{ expense.description }</td>
             <td>{ expense.tag }</td>
             <td>{ expense.method }</td>
-            <td>{ parseFloat(expense.value).toFixed(2) }</td>
-            <td>{ expense.exchangeRates[expense.currency].name }</td>
-            <td>{ parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2)}</td>
+            <td>{ (expense.value).toFixed(2) }</td>
+            <td>{ expense.currency }</td>
+            <td>{ (expense.cambio as number).toFixed(2) }</td>
+            <td>{ (expense.convert as number).toFixed(2) }</td>
+            <td>{ expense.baseCoin }</td>
             <td>
-              { (parseFloat(expense.value) * parseFloat(expense
-                .exchangeRates[expense.currency].ask)).toFixed(2) }
+              <button>✏️</button>
+              <button
+                onClick={ () => handleDelete(expense.id) }
+                data-testid="delete-btn"
+              >
+                Apagar
+              </button>
             </td>
-            <td>Real</td>
-            <button>✏️</button>
-            <button>❌</button>
           </tr>
         </tbody>
       )) }

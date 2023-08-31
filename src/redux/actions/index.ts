@@ -1,9 +1,10 @@
-import { Dispatch } from '../../type';
+import { Dispatch, TableInfos } from '../../type';
 
 export const USER_LOGIN = 'USER_LOGIN';
 export const CURRENCY_API_START = 'CURRENCY_API_START';
 export const CURRENCY_API_SUCCESS = 'CURRENCY_API_SUCCESS';
 export const UPDATE_EXCHANGE = 'UPDATE_EXCHANGE';
+export const UPDATE_USER_EXPENSES = 'UPDATE_USER_EXPENSES';
 
 export const userLogin = (personalInfo: object) => ({
   type: USER_LOGIN,
@@ -25,6 +26,11 @@ export const updateExchange = (data: any, userExpenseInfo: any) => ({
     data,
     userExpenseInfo,
   },
+});
+
+export const updateExpenses = (id: number) => ({
+  type: UPDATE_USER_EXPENSES,
+  payload: id,
 });
 
 const DefaultURL = 'https://economia.awesomeapi.com.br/json/all';

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { getCurrencyApi } from '../redux/actions';
-import { Dispatch, WalletInfo } from '../type';
+import { Dispatch, ExpensesType, WalletInfo } from '../type';
 
 function WalletForm() {
   const [lastId, setLastId] = useState(0);

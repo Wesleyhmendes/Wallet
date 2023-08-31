@@ -43,4 +43,16 @@ export type WalletInfo = {
   }
 };
 
+export type TableInfos = {
+  description: string,
+  tag: string,
+  method: string,
+  value: number,
+  currency: string,
+  cambio: number | string,
+  convert: number | string,
+  baseCoin: string,
+  id: number,
+};
+
 export type Dispatch = ThunkDispatch<WalletInfo, null, AnyAction>;

@@ -1,8 +1,14 @@
 import { AnyAction } from 'redux';
-import { CURRENCY_API_SUCCESS, CURRENCY_API_START, UPDATE_EXCHANGE } from '../actions';
+import {
+  CURRENCY_API_SUCCESS,
+  CURRENCY_API_START,
+  UPDATE_EXCHANGE,
+  UPDATE_USER_EXPENSES,
+} from '../actions';
+import { WalletInfo } from '../../type';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-const INITIAL_STATE = {
+const INITIAL_STATE: WalletInfo['wallet'] = {
   currencies: [],
   expenses: [],
   editor: false,
@@ -18,6 +24,11 @@ const personalWallet = (state = INITIAL_STATE, action: AnyAction) => {
       };
     case CURRENCY_API_START:
       return state;
+    case UPDATE_USER_EXPENSES:
+      return {
+        ...state,
+        expenses: state.expenses.filter((expense) => expense.id !== action.payload),
+      };
     case UPDATE_EXCHANGE:
       return {
         ...state,

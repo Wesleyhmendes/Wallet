@@ -12,8 +12,6 @@ function Header() {
     return total + askValue * expenseValue;
   }, 0);
 
-  console.log(userExpenses);
-
   return (
     <header>
       <p data-testid="email-field">

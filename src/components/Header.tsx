@@ -4,11 +4,16 @@ import { UserInfo, WalletInfo } from '../type';
 function Header() {
   const userInfo = useSelector((state: UserInfo) => state.user.email);
   const userExpenses = useSelector((state: WalletInfo) => state.wallet.expenses);
-  console.log(userInfo);
-  const total = userExpenses.map((expense) => expense.value).reduce((acc, crr) => {
-    acc += Number(crr);
-    return acc;
+
+  const totalExpense = userExpenses.reduce((total, expense) => {
+    const { value, currency } = expense;
+    const askValue = parseFloat(expense.exchangeRates[currency].ask);
+    const expenseValue = parseFloat(value);
+    return total + askValue * expenseValue;
   }, 0);
+
+  console.log(userExpenses);
+
   return (
     <header>
       <p data-testid="email-field">
@@ -17,8 +22,7 @@ function Header() {
       </p>
       <p data-testid="header-currency-field">Casa de Câmbio: BRL</p>
       <p data-testid="total-field">
-        Despesa Total:
-        { total.toFixed(2) }
+        { totalExpense.toFixed(2) }
       </p>
     </header>
   );

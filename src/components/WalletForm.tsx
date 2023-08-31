@@ -7,7 +7,7 @@ function WalletForm() {
   const [lastId, setLastId] = useState(0);
   const [userExpense, setUserExpense] = useState({
     id: 0,
-    value: 0,
+    value: '',
     description: '',
     currency: 'USD',
     method: 'money',
@@ -22,8 +22,6 @@ function WalletForm() {
 
   const currencies = useSelector((state: WalletInfo) => state.wallet.currencies);
 
-  console.log(currencies);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setUserExpense({
@@ -34,21 +32,21 @@ function WalletForm() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setUserExpense({
+    const updatedUserExpense = {
       ...userExpense,
       id: lastId === 0 ? 0 : lastId,
-    });
-    dispatch(getCurrencyApi(false));
-    setLastId(lastId + 1);
-    dispatch(getCurrencyApi(userExpense));
+    };
+
+    dispatch(getCurrencyApi(updatedUserExpense));
     setUserExpense({
-      id: 0,
-      value: 0,
+      id: lastId + 1,
+      value: '',
       description: '',
       currency: 'USD',
-      method: 'money',
+      method: 'Dinheiro',
       tag: 'Alimentação',
     });
+    setLastId(lastId + 1);
   };
 
   return (
@@ -69,7 +67,7 @@ function WalletForm() {
           onChange={ (event) => handleChange(event) }
           name="tag"
           data-testid="tag-input"
-          defaultValue="Alimentação"
+          value={ userExpense.tag }
         >
           <option value="Alimentação">Alimentação</option>
           <option value="Lazer">Lazer</option>
@@ -94,7 +92,7 @@ function WalletForm() {
           onChange={ (event) => handleChange(event) }
           name="method"
           data-testid="method-input"
-          defaultValue="Dinheiro"
+          value={ userExpense.method }
         >
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de crédito">Cartão de crédito</option>
@@ -107,6 +105,7 @@ function WalletForm() {
           onChange={ (event) => handleChange(event) }
           name="currency"
           data-testid="currency-input"
+          value={ userExpense.currency }
         >
           { currencies.map((coin, index) => (
             <option key={ index } value={ coin }>{ coin }</option>

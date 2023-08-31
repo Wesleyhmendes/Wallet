@@ -1,6 +1,5 @@
 import { Dispatch } from '../../type';
 
-// Coloque aqui suas actions
 export const USER_LOGIN = 'USER_LOGIN';
 export const CURRENCY_API_START = 'CURRENCY_API_START';
 export const CURRENCY_API_SUCCESS = 'CURRENCY_API_SUCCESS';
@@ -43,7 +42,7 @@ export function getCurrencyApi(userExpenseInfo: any) {
         dispatch(updateExchange(data, userExpenseInfo));
       }
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
     }
   };
 }

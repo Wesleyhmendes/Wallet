@@ -34,12 +34,22 @@ export type Expense = {
   exchangeRates: ExpensesType['exchangeRates']
 };
 
+export type EditExpense = {
+  id: number,
+  value: string,
+  description: string,
+  currency: string,
+  method: string,
+  tag: string,
+};
+
 export type WalletInfo = {
   wallet: {
     currencies: Array<string>,
     expenses: Array<Expense>,
-    editor: boolean,
-    idToEdit: number,
+    // editor: boolean,
+    editMode: boolean,
+    expenseIdToEdit: number,
   }
 };
 

@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { MouseEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dispatch, TableInfos, WalletInfo } from '../type';
-import { updateExpenses } from '../redux/actions';
+import { updateExpenses, editButton, sendExpenseId } from '../redux/actions';
 
 function Table() {
   const [expenseState, setExpenseState] = useState<TableInfos[]>([]);
 
   const userExpenses = useSelector((state: WalletInfo) => state.wallet.expenses);
+  const idToEdit = useSelector((state: WalletInfo) => state.wallet.idToEdit);
   const dispatch: Dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,6 +31,11 @@ function Table() {
 
   const handleDelete = (id: number) => {
     dispatch(updateExpenses(id));
+  };
+
+  const handleEdit = (id: number) => {
+    dispatch(editButton());
+    dispatch(sendExpenseId(id));
   };
 
   return (
@@ -59,12 +65,20 @@ function Table() {
             <td>{ (expense.convert as number).toFixed(2) }</td>
             <td>{ expense.baseCoin }</td>
             <td>
-              <button>✏️</button>
               <button
-                onClick={ () => handleDelete(expense.id) }
-                data-testid="delete-btn"
+                data-testid="edit-btn"
+                disabled={ idToEdit }
+                onClick={ () => handleEdit(expense.id) }
               >
-                Apagar
+                <img src="imgs/edit.svg" alt="edit" />
+              </button>
+
+              <button
+                data-testid="delete-btn"
+                onClick={ () => handleDelete(expense.id) }
+                disabled={ idToEdit }
+              >
+                <img src="imgs/remove.svg" alt="remove" />
               </button>
             </td>
           </tr>

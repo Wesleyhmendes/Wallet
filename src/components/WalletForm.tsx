@@ -1,18 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { getCurrencyApi } from '../redux/actions';
-import { Dispatch, ExpensesType, WalletInfo } from '../type';
+import { getCurrencyApi, editExpense, editButton } from '../redux/actions';
+import { Dispatch, EditExpense, WalletInfo } from '../type';
 
 function WalletForm() {
-  const [lastId, setLastId] = useState(0);
-  const [userExpense, setUserExpense] = useState({
+  const INPUTS_INICIAL_STATE: EditExpense = {
     id: 0,
     value: '',
     description: '',
     currency: 'USD',
-    method: 'money',
+    method: 'Dinheiro',
     tag: 'Alimentação',
-  });
+  };
+
+  const [lastId, setLastId] = useState(0);
+  const [userExpense, setUserExpense] = useState(INPUTS_INICIAL_STATE);
 
   useEffect(() => {
     dispatch(getCurrencyApi(false));
@@ -21,6 +23,7 @@ function WalletForm() {
   const dispatch: Dispatch = useDispatch();
 
   const currencies = useSelector((state: WalletInfo) => state.wallet.currencies);
+  const idToEdit = useSelector((state: WalletInfo) => state.wallet.editMode);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -32,21 +35,27 @@ function WalletForm() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const updatedUserExpense = {
-      ...userExpense,
-      id: lastId === 0 ? 0 : lastId,
-    };
+    if (!idToEdit) {
+      const updatedUserExpense = {
+        ...userExpense,
+        id: lastId === 0 ? 0 : lastId, // Não preciso desta condicional. Retirar depois...
+      };
 
-    dispatch(getCurrencyApi(updatedUserExpense));
-    setUserExpense({
-      id: lastId + 1,
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-    });
-    setLastId(lastId + 1);
+      dispatch(getCurrencyApi(updatedUserExpense));
+      setUserExpense(INPUTS_INICIAL_STATE);
+      setLastId(lastId + 1);
+    } else {
+      const editedInfo = {
+        value: userExpense.value,
+        description: userExpense.description,
+        currency: userExpense.currency,
+        method: userExpense.method,
+        tag: userExpense.tag,
+      };
+      dispatch(editExpense(editedInfo));
+      setUserExpense(INPUTS_INICIAL_STATE);
+      dispatch(editButton());
+    }
   };
 
   return (
@@ -112,7 +121,7 @@ function WalletForm() {
           )) }
         </select>
       </label>
-      <button>Adicionar despesa</button>
+      <button>{ idToEdit ? 'Editar despesa' : 'Adicionar Despesa' }</button>
     </form>
   );
 }

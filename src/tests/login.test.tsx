@@ -1,22 +1,11 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import { legacy_createStore as createStore } from 'redux';
-import { vi } from 'vitest';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
-import { getCurrencyApi } from '../redux/actions';
-import mockData from './helpers/mockData';
 
 const USER_EMAIL = 'teste@trybe.com';
 const USER_PASSWORD = '123456';
 const route = '/carteira';
-
-const userInfo = {
-  user: {
-    email: USER_EMAIL,
-    password: USER_PASSWORD,
-  },
-};
 
 const firstDescription = 'Livros';
 const firstValue = '44';

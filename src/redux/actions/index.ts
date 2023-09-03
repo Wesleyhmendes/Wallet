@@ -1,4 +1,4 @@
-import { Dispatch, EditExpense } from '../../type';
+import { Dispatch } from '../../type';
 
 export const USER_LOGIN = 'USER_LOGIN';
 export const CURRENCY_API_START = 'CURRENCY_API_START';

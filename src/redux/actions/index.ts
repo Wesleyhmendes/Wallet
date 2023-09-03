@@ -65,7 +65,7 @@ export function getCurrencyApi(userExpenseInfo: any) {
         dispatch(updateExchange(data, userExpenseInfo));
       }
     } catch (error: any) {
-      // console.log(error);
+      console.log('error');
     }
   };
 }

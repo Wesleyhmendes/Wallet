@@ -7,7 +7,7 @@ function Table() {
   const [expenseState, setExpenseState] = useState<TableInfos[]>([]);
 
   const userExpenses = useSelector((state: WalletInfo) => state.wallet.expenses);
-  const idToEdit = useSelector((state: WalletInfo) => state.wallet.idToEdit);
+  const idToEdit = useSelector((state: WalletInfo) => state.wallet.editMode);
   const dispatch: Dispatch = useDispatch();
 
   useEffect(() => {

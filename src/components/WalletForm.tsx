@@ -63,6 +63,7 @@ function WalletForm() {
       <label htmlFor="description">
         Descrição da despesa
         <input
+          placeholder="Descrição"
           data-testid="description-input"
           value={ userExpense.description }
           onChange={ handleChange }
@@ -88,6 +89,7 @@ function WalletForm() {
       <label htmlFor="value">
         Valor
         <input
+          placeholder="Valor"
           value={ userExpense.value }
           onChange={ (event) => handleChange(event) }
           name="value"

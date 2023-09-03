@@ -67,6 +67,7 @@ function Table() {
             <td>
               <button
                 data-testid="edit-btn"
+                name="remove"
                 disabled={ idToEdit }
                 onClick={ () => handleEdit(expense.id) }
               >

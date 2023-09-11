@@ -1,0 +1,80 @@
+.addExpenseForm {
+  background-color: #F0F2F5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 134px;
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 1600px;
+}
+
+.inputLabel {
+  align-items: center;
+  color: #003BE5;
+  display: flex;
+  font-weight: bold;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  margin-right: 30px;
+  padding-left: 4px;
+}
+
+.formInputs {
+  border-radius: 5px;
+}
+
+.inputClass {
+  border: 1px solid #003BE5;
+  border-radius: 5px;
+  height: 30px;
+  padding: 5px;
+}
+
+.descriptionClass {
+  margin-left: 10px;
+  width: 288.86px;
+}
+
+.categoryClass {
+  background-color: transparent;
+  margin-left: 10px;
+  width: 155px;
+}
+
+.valueClass {
+  margin-left: 10px;
+  width: 158px;
+}
+
+.methodClass {
+  background-color: transparent;
+  margin-left: 10px;
+  width: 228px;
+}
+
+.currencyClass {
+  width: 91px;
+  background-color: transparent;
+  margin-left: 10px;
+}
+
+.addButton {
+  border-radius: 5px;
+  border: 1px solid #2FC18C;
+  background: #2FC18C;
+  color: #FFF;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  height: 40px;
+  line-height: normal;
+  text-align: center;
+  width: 330px;
+}
+
+.addExpenseButtonDiv {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+}

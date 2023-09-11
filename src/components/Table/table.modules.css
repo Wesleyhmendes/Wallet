@@ -1,0 +1,86 @@
+.table {
+  background: #003BE5;
+  border-radius: 10px;
+  box-shadow: -4px 9px 13px 0px rgba(3, 107, 82, 0.30);
+  font-size: 19px;
+  height: 464px;
+  padding: 40px;
+  padding-top: 300px;
+  position: absolute;
+  top: 200px;
+  width: 1755px;
+  z-index: -1;
+
+}
+
+.mainTable {
+  display: flex;
+  justify-content: center;
+}
+
+.tableHead {
+  color: white;
+  font-size: 21px;
+  border-right: 2px solid white;
+}
+
+.tableHead2 {
+  color: white;
+  font-size: 21px;
+  width: 110.933px;
+  height: 26.6px;
+}
+
+.tableBody {
+  text-align: center;
+  color: #2FC18C;
+  border-bottom: 1px solid;
+  width: 110.933px;
+  height: 80px;
+}
+
+.buttonTD {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin: 0 auto;
+  text-align: center;
+  width: 150px;
+}
+
+.editButton {
+  background-color: #2FC18C;
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 7px 14px;
+  width: 130px;
+  margin-top: 5px;
+  transition: background-color 0.5s ease;
+}
+
+.removeButton {
+  background-color: #c0392b;
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 7px 14px;
+  width: 130px;
+  margin-top: 5px;
+  transition: background-color 0.5s ease;
+}
+
+.editNRemoveBtn {
+  width: 50px;
+}
+
+.removeButton:hover {
+  background-color: #f42710;
+}
+
+.editButton:hover {
+  background-color: #05f59d;
+}

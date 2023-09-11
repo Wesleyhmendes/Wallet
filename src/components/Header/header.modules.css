@@ -1,0 +1,39 @@
+.HeaderUserInfos {
+  margin-bottom: 45px;
+}
+
+.headerInfos {
+  align-items: center;
+  color: #003BE5;
+  display: flex;
+  font-size: 19px;
+  justify-content: space-around;
+}
+
+.loginTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.total {
+  align-items: center;
+  display: flex;
+}
+
+.emailP {
+  align-items: center;
+  color: #7DC6AB;
+  display: flex;
+}
+
+.totalIcon {
+  margin-right: 10px;
+}
+
+.profileIcon {
+  margin-right: 10px;
+}
+
+.totalP {
+  margin-right: 10px;
+}

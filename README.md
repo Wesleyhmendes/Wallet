@@ -1,4 +1,4 @@
-#  💼 Projeto Trybe Wallet
+#  💼 Projeto Wallet
 Neste projeto, eu criei o Trybe Wallet, uma carteira de controle de gastos com conversor de moedas. Ao utilizar essa aplicação, a pessoa usuária deverá ser capaz de:
 
 - 📝 Adicionar, remover e editar um gasto.
